@@ -1,7 +1,7 @@
-if game.PlaceId == 4639625707 then
+if game.PlaceId == 4639625707 or 8829529631 then
     local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
-    
+
     -- Window --
 
     local Window = Rayfield:CreateWindow({
@@ -10,22 +10,22 @@ if game.PlaceId == 4639625707 then
         LoadingTitle = "RBLXLOL V1.0",
         LoadingSubtitle = "by BackshotMaster",
         Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
-     
+
         DisableRayfieldPrompts = false,
         DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
-     
+
         ConfigurationSaving = {
            Enabled = true,
            FolderName = "RBLXLOL Cfg", -- Create a custom folder for your hub/game
            FileName = "RBLXLOL Hub"
         },
-     
+
         Discord = {
            Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
            Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
            RememberJoins = true -- Set this to false to make them join the discord every time they load it up
         },
-     
+
         KeySystem = false, -- Set this to true to use our key system
         KeySettings = {
            Title = "Untitled",
@@ -42,7 +42,7 @@ if game.PlaceId == 4639625707 then
 
      local Tab = Window:CreateTab("Simple Scripts", "file-code-2") -- Title, Image
      local Tab2 = Window:CreateTab("Advanced Scripts", "terminal") -- Title, Image
-     
+
      -- Sliders --
 
      local Slider = Tab:CreateSlider({
@@ -85,37 +85,38 @@ if game.PlaceId == 4639625707 then
 
      -- Toggles --
 
-     local Toggle = Tab2:CreateToggle({
-        Name = "Toggle ESP",
+     local Toggle = Tab2:CreateToggle({ -- NOCLIP TOGGLE --
+        Name = "Toggle Noclip",
         CurrentValue = false,
-        Flag = "ESPToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+        Flag = "NoclipToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
         Callback = function(Value)
-           if Toggle:Set(true) then
-            local Players = game:GetService("Players"):GetChildren()
-            local highlight = Instance.new("Highlight")
-            highlight.Name = "Highlight"
-          
-      
-      
-            for i, v in pairs(Players) do
-               repeat task.wait() until v.Character
-               local highlightClone = highlight:Clone()
-               highlightClone.Adornee = v.Character
-               highlightClone.Parent = v.Character:FindFirstChild("HumanoidRootPart")
-            end
-      
-      
-            game.Players.PlayerAdded:Connect(function(player)
-               repeat task.wait() until player.Character
-               local highlightClone = highlight:Clone()
-               highlightClone.Adornee = player.Character
-               highlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
-           end)
+         local Noclip = nil
+         local Clip = nil
 
-            end    -- The function that takes place when the toggle is pressed
-        -- The variable (Value) is a boolean on whether the toggle is true or false
-        end,
-     })
+         function noclip()
+            Clip = false
+            local function Nocl()
+               if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+                  for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                     if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+                        v.CanCollide = false
+                     end
+                  end
+               end
+               task.wait(0.21) -- basic optimization
+            end
+            Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+         end
+
+         function clip()
+            if Noclip then Noclip:Disconnect() end
+            Clip = true
+         end
+
+         noclip() -- to toggle noclip() and clip()
+
+         end,
+      })
 
 
 

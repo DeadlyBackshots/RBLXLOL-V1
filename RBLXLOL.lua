@@ -138,6 +138,15 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
          -- The variable (Value) is a boolean on whether the toggle is true or false
          end,
       })
+      -- Buttons --
+
+      local Button = Tab:CreateButton({
+         Name = "Simple Spy",
+         Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/DeadlyBackshots/Cheet0-2.5-Roblox-Script/refs/heads/main/Things-Added/SimpleSpy.lua"))()
+         end,
+      })
+
 
 
 

@@ -1,4 +1,4 @@
-if game.PlaceId == 4639625707 or 8829529631 then
+
     local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 
@@ -42,6 +42,7 @@ if game.PlaceId == 4639625707 or 8829529631 then
 
      local Tab = Window:CreateTab("Simple Scripts", "file-code-2") -- Title, Image
      local Tab2 = Window:CreateTab("Advanced Scripts", "terminal") -- Title, Image
+     local Tab3 = Window:CreateTab("Troll Scripts", "skull") -- Title, Image
 
      -- Sliders --
 
@@ -49,7 +50,7 @@ if game.PlaceId == 4639625707 or 8829529631 then
         Name = "Walkspeed Slider",
         Range = {16, 80},
         Increment = 1,
-        Suffix = "Bananas",
+        Suffix = "Walkspeed",
         CurrentValue = 16,
         Flag = "SpeedSlider", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
         Callback = function(V)
@@ -62,7 +63,7 @@ if game.PlaceId == 4639625707 or 8829529631 then
         Name = "Jumppower Slider",
         Range = {50, 100},
         Increment = 1,
-        Suffix = "Bananas",
+        Suffix = "Jumppower",
         CurrentValue = 50,
         Flag = "JumpSlider", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
         Callback = function(V)
@@ -74,7 +75,7 @@ if game.PlaceId == 4639625707 or 8829529631 then
         Name = "FOV Slider",
         Range = {70, 100},
         Increment = 1,
-        Suffix = "Bananas",
+        Suffix = "FOV",
         CurrentValue = 70,
         Flag = "FOVSlider", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
         Callback = function(V)
@@ -118,8 +119,26 @@ if game.PlaceId == 4639625707 or 8829529631 then
          end,
       })
 
+      local Toggle = Tab2:CreateToggle({
+         Name = "ESP Toggle (Wallhack)",
+         CurrentValue = false,
+         Flag = "ESPToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+         Callback = function(Value)
+         local Sense = loadstring(game:HttpGet('https://sirius.menu/sense'))()
 
-
+         Sense.teamSettings.enemy.enabled = true
+         Sense.teamSettings.enemy.box = true
+         Sense.teamSettings.enemy.boxColor[1] = Color3.new(1, 0, 0)
+         
+         if Toggle:Set(true) then
+            Sense.Load()
+         else
+            Sense.Unload()
+         end
+         --Sense.Unload()-- The function that takes place when the toggle is pressed
+         -- The variable (Value) is a boolean on whether the toggle is true or false
+         end,
+      })
 
 
 
@@ -139,5 +158,4 @@ if game.PlaceId == 4639625707 or 8829529631 then
         end,
      })
 
-
-end
+Rayfield:LoadConfiguration()

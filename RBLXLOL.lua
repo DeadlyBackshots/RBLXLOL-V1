@@ -129,9 +129,9 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
          Sense.teamSettings.enemy.enabled = true
          Sense.teamSettings.enemy.box = true
          Sense.teamSettings.enemy.boxColor[1] = Color3.new(1, 0, 0)
-            
+
          if Value == true then
-            Sense.Load()  
+            Sense.Load()
          else
             Sense.Unload()
          end
@@ -161,11 +161,16 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
      local Keybind = Tab:CreateKeybind({
         Name = "PANIC BUTTON",
-        CurrentKeybind = ".",
+        CurrentKeybind "F10",
         HoldToInteract = false,
         Flag = "PanicKeybind", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
         Callback = function(Keybind)
-            Rayfield:Destroy() -- The function that takes place when the keybind is pressed
+         local UIS = game:GetService("UserInputService")
+         
+         if UIS.InputBegan == Enum.KeyCode.F10 then
+            Rayfield:Destroy()
+         end
+          -- The function that takes place when the keybind is pressed
         -- The variable (Keybind) is a boolean for whether the keybind is being held or not (HoldToInteract needs to be true)
         end,
      })

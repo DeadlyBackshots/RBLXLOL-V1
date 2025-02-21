@@ -122,20 +122,22 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
          Name = "ESP Toggle (Wallhack)",
          CurrentValue = false,
          Flag = "ESPToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-         Callback = function (ESP)
+         Callback = function (Value)
          local Sense = loadstring(game:HttpGet('https://sirius.menu/sense'))()
-         
+         loadstring(game:HttpGet('https://raw.githubusercontent.com/DeadlyBackshots/RBLXLOL-V1/refs/heads/main/Loadstrings/SenseEspCfg.lua'))()
+
          Sense.teamSettings.enemy.enabled = true
          Sense.teamSettings.enemy.box = true
          Sense.teamSettings.enemy.boxColor[1] = Color3.new(1, 0, 0)
-         
-         if Toggle:Set(true) then
-            Sense.Load()
+            
+         if Value == true then
+            Sense.Load()  
          else
             Sense.Unload()
          end
 
-         ESP()
+
+
 
          -- The variable (Value) is a boolean on whether the toggle is true or false
          end,
@@ -167,5 +169,3 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
         -- The variable (Keybind) is a boolean for whether the keybind is being held or not (HoldToInteract needs to be true)
         end,
      })
-
-Rayfield:LoadConfiguration()

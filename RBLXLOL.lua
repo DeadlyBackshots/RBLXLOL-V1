@@ -67,7 +67,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
         CurrentValue = 50,
         Flag = "JumpSlider", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
         Callback = function(V)
-            game.Players.LocalPlayer.Humanoid.Jumppower = V-- The function that takes place when the slider changes
+            game.Players.LocalPlayer.Character.Humanoid.Jumppower = V-- The function that takes place when the slider changes
         -- The variable (Value) is a number which correlates to the value the slider is currently at
         end,
      })
@@ -91,8 +91,27 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
          CurrentValue = false,
          Flag = "ESPToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
          Callback = function (Value)
-               pcall(function() loadstring(game:HttpGet('https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/UnnamedESP.lua'))() end)
-
+            local Players = game:GetService("Players"):GetChildren()
+            local highlight = Instance.new("Highlight")
+            highlight.Name = "Highlight"
+          
+      
+      
+            for i, v in pairs(Players) do
+               repeat task.wait() until v.Character
+               local highlightClone = highlight:Clone()
+               highlightClone.Adornee = v.Character
+               highlightClone.Parent = v.Character:FindFirstChild("HumanoidRootPart")
+            end
+      
+      
+            game.Players.PlayerAdded:Connect(function(player)
+               repeat task.wait() until player.Character
+               local highlightClone = highlight:Clone()
+               highlightClone.Adornee = player.Character
+               highlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
+            end)
+      
          end,
       })
 
@@ -112,16 +131,16 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
      -- Keybinds --
 
      local Keybind = Tab4:CreateKeybind({
-        Name = "PANIC BUTTON",
-        CurrentKeybind "F1",
-        HoldToInteract = false,
-        Flag = "PanicKeybind", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-        Callback = function(Keybind)
+      Name = "Panic Keybind",
+      CurrentKeybind = "Period",
+      HoldToInteract = false,
+      Flag = "PanicKeybind", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+      Callback = function(Keybind)
          local UIS = game:GetService("UserInputService")
          
-         if UIS.InputBegan == Enum.KeyCode.F1 then
+         if UIS.InputBegan == Enum.KeyCode.Period then
             Rayfield:Destroy()
-         end
-
-        end,
-     })
+         end-- The function that takes place when the keybind is pressed
+      -- The variable (Keybind) is a boolean for whether the keybind is being held or not (HoldToInteract needs to be true)
+      end,
+   })

@@ -91,11 +91,12 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
          CurrentValue = false,
          Flag = "ESPToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
          Callback = function (Value)
-            local Players = game:GetService("Players"):GetChildren()
+            
+            if Value == true then
+               local Players = game:GetService("Players"):GetChildren()
             local highlight = Instance.new("Highlight")
             highlight.Name = "Highlight"
           
-      
       
             for i, v in pairs(Players) do
                repeat task.wait() until v.Character
@@ -111,7 +112,12 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
                highlightClone.Adornee = player.Character
                highlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
             end)
+         else
+            highlight:Destroy()
+            highlightClone:Destroy()
       
+            end
+            
          end,
       })
 
@@ -124,7 +130,12 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
          end,
       })
 
-
+      local Button = Tab2:CreateButton({
+         Name = "Infinite Yield",
+         Callback = function()
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+         end,
+      })
 
 
 

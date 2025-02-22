@@ -67,7 +67,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
         CurrentValue = 50,
         Flag = "JumpSlider", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
         Callback = function(V)
-            game.Players.LocalPlayer.Humanoid.JumpHeight = V-- The function that takes place when the slider changes
+            game.Players.LocalPlayer.Humanoid.Jumppower = V-- The function that takes place when the slider changes
         -- The variable (Value) is a number which correlates to the value the slider is currently at
         end,
      })

@@ -91,11 +91,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
          CurrentValue = false,
          Flag = "ESPToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
          Callback = function (Value)
-            local Sense = loadstring(game:HttpGet('https://sirius.menu/sense'))()
-         
-            if Value == true then
                pcall(function() loadstring(game:HttpGet('https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/UnnamedESP.lua'))() end)
-         end
 
          end,
       })

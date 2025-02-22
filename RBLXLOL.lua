@@ -42,6 +42,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
      local Tab = Window:CreateTab("Simple Scripts", "file-code-2") -- Title, Image
      local Tab2 = Window:CreateTab("Advanced Scripts", "terminal") -- Title, Image
      local Tab3 = Window:CreateTab("Troll Scripts", "skull") -- Title, Image
+     local Tab4 = Window:CreateTab("Keybinds", "keyboard") -- Title, Image
 
      -- Sliders --
 
@@ -85,73 +86,36 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
      -- Toggles --
 
-     local Toggle = Tab2:CreateToggle({ -- NOCLIP TOGGLE --
-        Name = "Toggle Noclip",
-        CurrentValue = false,
-        Flag = "NoclipToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-        Callback = function(Value)
-         local Noclip = nil
-         local Clip = nil
-
-         function noclip()
-            Clip = false
-            local function Nocl()
-               if Clip == false and game.Players.LocalPlayer.Character ~= nil then
-                  for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-                     if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
-                        v.CanCollide = false
-                     end
-                  end
-               end
-               task.wait(0.21) -- basic optimization
-            end
-            Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
-         end
-
-         function clip()
-            if Noclip then Noclip:Disconnect() end
-            Clip = true
-         end
-
-         noclip() -- to toggle noclip() and clip()
-
-         end,
-      })
-
       local Toggle = Tab2:CreateToggle({
          Name = "ESP Toggle (Wallhack)",
          CurrentValue = false,
          Flag = "ESPToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
          Callback = function (Value)
-         local Sense = loadstring(game:HttpGet('https://sirius.menu/sense'))()
-         loadstring(game:HttpGet('https://raw.githubusercontent.com/DeadlyBackshots/RBLXLOL-V1/refs/heads/main/Loadstrings/SenseEspCfg.lua'))()
+            local Sense = loadstring(game:HttpGet('https://sirius.menu/sense'))()
+         
+            if Value == true then
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/DeadlyBackshots/RBLXLOL-V1/refs/heads/main/Loadstrings/SenseEspCfg.lua'))()
 
-         Sense.teamSettings.enemy.enabled = true
-         Sense.teamSettings.enemy.box = true
-         Sense.teamSettings.enemy.boxColor[1] = Color3.new(1, 0, 0)
+            Sense.teamSettings.enemy.enabled = true
+            Sense.teamSettings.enemy.box = true
+            Sense.teamSettings.enemy.boxColor[1] = Color3.new(1, 0, 0)
 
-         if Value == true then
             Sense.Load()
          else
             Sense.Unload()
          end
 
-
-
-
-         -- The variable (Value) is a boolean on whether the toggle is true or false
          end,
       })
+
       -- Buttons --
-
-      local Button = Tab:CreateButton({
-         Name = "Simple Spy",
+   
+      local Button = Tab2:CreateButton({
+         Name = "Dex Explorer",
          Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/DeadlyBackshots/Cheet0-2.5-Roblox-Script/refs/heads/main/Things-Added/SimpleSpy.lua"))()
+            loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Dex%20Explorer.txt"))()
          end,
       })
-
-
 
 
 
@@ -159,18 +123,17 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
      -- Keybinds --
 
-     local Keybind = Tab:CreateKeybind({
+     local Keybind = Tab4:CreateKeybind({
         Name = "PANIC BUTTON",
-        CurrentKeybind "F10",
+        CurrentKeybind "F1",
         HoldToInteract = false,
         Flag = "PanicKeybind", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
         Callback = function(Keybind)
          local UIS = game:GetService("UserInputService")
          
-         if UIS.InputBegan == Enum.KeyCode.F10 then
+         if UIS.InputBegan == Enum.KeyCode.F1 then
             Rayfield:Destroy()
          end
-          -- The function that takes place when the keybind is pressed
-        -- The variable (Keybind) is a boolean for whether the keybind is being held or not (HoldToInteract needs to be true)
+
         end,
      })

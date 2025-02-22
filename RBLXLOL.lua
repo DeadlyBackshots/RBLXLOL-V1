@@ -94,15 +94,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
             local Sense = loadstring(game:HttpGet('https://sirius.menu/sense'))()
          
             if Value == true then
-            loadstring(game:HttpGet('https://raw.githubusercontent.com/DeadlyBackshots/RBLXLOL-V1/refs/heads/main/Loadstrings/SenseEspCfg.lua'))()
-
-            Sense.teamSettings.enemy.enabled = true
-            Sense.teamSettings.enemy.box = true
-            Sense.teamSettings.enemy.boxColor[1] = Color3.new(1, 0, 0)
-
-            Sense.Load()
-         else
-            Sense.Unload()
+               pcall(function() loadstring(game:HttpGet('https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/UnnamedESP.lua'))() end)
          end
 
          end,
